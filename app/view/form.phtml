@@ -1,0 +1,38 @@
+<div class="page-header">
+    <h1>Write down hours yoo have worked</h1>
+</div>
+
+<br/>
+
+<form method="post" action="<?php echo App::config('url') ?>form/submit" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label for="amount">Amount</label>
+        <input id="amount" name="amount" type="number" min="1" required class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="description">Work description</label>
+        <textarea id="description" name="description" class="form-control" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="name">Work type</label>
+        <select id="work_type" name="work_type"> <!--Supplement an id here instead of using 'name'-->
+            <option value="development" selected>Development</option>
+            <option value="project_management" >Project Management</option>
+            <option value="icg">ICG</option>
+            <option value="other">Other</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="date">Date</label>
+        <input id="date" name="date" type="date" required class="form-control" />
+    </div>
+
+    <br/>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
