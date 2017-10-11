@@ -1,0 +1,36 @@
+<div class="page-header">
+<h1>List of recorded working hours</h1>
+</div>
+
+<br/>
+
+<table class="table">
+    <tr><th>No</th><th>Date</th><th>Amount</th><th>Description</th><th>Work type</th><th>Erase</th></tr>
+    <?php
+    
+    $i=0;
+    
+    foreach($args as $row)
+    {
+        foreach ($row as $record)
+        {
+            //var_dump($record);
+        echo '<tr>'
+            . '<td>' . ++$i . '</td>'
+            . '<td>' . $record['date'] . '</td>'
+            . '<td>' . $record['amount'] . '</td>'
+            . '<td>' . $record['description'] . '</td>'
+            . '<td>' . $record['work_type'] . '</td>'
+            . '<td>
+                   <form method="post" action="http://mvc-app.loc/form/erase"  enctype="multipart/form-data">
+                        <input type="hidden" name="erase" value="' . $record['id'] . '" >
+                        <button type="submit" class="btn btn-primary">Erase record</button>
+                    </form>
+               </td>'
+            . '</tr>';
+            //echo "</br>";
+
+        }
+    }
+    ?>
+</table>

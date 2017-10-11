@@ -32,23 +32,24 @@ class FormController
         $connection = App::connect();
 
         $sql = 'INSERT INTO `time_tracker`
-                (`user`, `amount`, `description`, `work_type`, `date`)
-                VALUES (:name, :user, :amount, :description, :work_type, :date)';
+                (`id`,`user`, `amount`, `description`, `work_type`, `date`)
+                VALUES (?, ?, ?, ?, ?, ?)';
 
         $stmt = $connection->prepare($sql);
-        array_unshift($data, $user);
-        $stmt->execute($data);
+        //array_unshift($data, $user);
+        //$stmt->execute($data);
+        $stmt->execute(array( NULL, $user, $data['amount'], $data['description'], $data['work_type'], $data['date']));
 
 
-        $sql = 'SELECT * FROM `time_tracker` ORDER BY `id`';
-
-        $stmt = $connection->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        print_r($result);
+//        $sql = 'SELECT * FROM `time_tracker` ORDER BY `id`';
+//
+//        $stmt = $connection->prepare($sql);
+//        $stmt->execute();
+//        $result = $stmt->fetchAll();
+//        print_r($result);
 
         // redirect to thank you page
-        //header('Location: ' . App::config('url').'form/thankyou');
+        header('Location: ' . App::config('url').'form/thankyou');
     }
 
     /**
@@ -85,17 +86,36 @@ class FormController
     {
         $view = new View();
         $view->render('thankyou');
+    }
 
+    public function listIt()
+    {
+        $connection = App::connect();
 
+        $sql = 'SELECT * FROM `time_tracker`
+                WHERE `user`=:user';
 
-        // log new entry
+        $stmt = $connection->prepare($sql);
+        //array_unshift($data, $user);
+        //$stmt->execute($data);
+        $stmt->execute(array('user' => 'Tena'));
+        $data = $stmt->fetchAll();
 
-        // create a log channel
-//        $log = new Logger('default');
-//        $log->pushHandler(new StreamHandler(BP . 'private/default.log', Logger::INFO));
-//
-//        // add record to the log
-//        $log->info('Thank you page, entry was created');
+        $view = new View();
+        $view->render('list', ['data'=>$data]);
+    }
+
+    public function erase()
+    {
+        $connection = App::connect();
+
+        $sql = "DELETE FROM `time_tracker` WHERE `id`=:id";
+        $id = $_POST['erase'];
+        $stmt = $connection->prepare($sql);
+        $stmt->execute(array('id' => $id));
+
+        //echo "Record was erased?";
+        header('Location: ' . App::config('url').'form/listIt');
     }
 
 }

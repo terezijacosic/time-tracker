@@ -28,6 +28,7 @@ class View
          * First, we need to "render" {view}.phtml and capture its output
          */
         ob_start();
+        //var_dump($args);
         extract($args);
         include BP . "app/view/$name.phtml";
         $content = ob_get_clean();

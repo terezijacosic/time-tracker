@@ -17,16 +17,8 @@
         <div class="container">
             <ul class="nav navbar-nav">
                 <li><a href="<?php echo App::config('url') ?>form/index">Write it down</a></li>
-                <li><a href="<?php echo App::config('url') ?>">List it</a></li>
-                <li><a href="<?php echo App::config('url') ?>">Edit it</a></li>
+                <li><a href="<?php echo App::config('url') ?>form/listIt">List it</a></li>
 
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <?php if(isset($isLoggedIn) && $isLoggedIn): ?>
-                    <li><a href="<?php echo App::config('url') ?>admin/logout">Logout</a></li>
-                <?php else: ?>
-                    <li><a href="<?php echo App::config('url') ?>admin/index">Login (admin)</a></li>
-                <?php endif; ?>
             </ul>
         </div>
     </nav>
@@ -38,7 +30,7 @@
     </main>
 
     <footer class="footer">
-        <p class="container">&copy; PHP Akademija, 2016</p>
+        <p class="container">Time Tracker, 2017</p>
     </footer>
 
     <!-- Bootstrap JavaScript -->

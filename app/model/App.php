@@ -76,6 +76,7 @@ final class App
 
         try {
             $conn = new PDO($dsn, $dbUser, $dbPassword);
+            $conn-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             return false;
         }
