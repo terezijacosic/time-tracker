@@ -118,4 +118,49 @@ class FormController
         header('Location: ' . App::config('url').'form/listIt');
     }
 
+    public function edit()
+    {
+        $id = $_POST['edit'];
+//
+        $view = new View();
+        $view->render('editform', ['id'=>$id]);
+
+    }
+
+    public function submitEdit()
+    {
+        echo "submitEdit";
+        $id = $_POST['id'];
+        echo $id;
+
+        $data = $this->_validate($_POST);
+
+        if($data === false) {
+            header('Location: ' . App::config('url').'form/index');
+        }
+
+        // write to database
+        $connection = App::connect();
+
+        $sql = 'UPDATE `time_tracker` SET                 
+                `user` =:user, 
+                `amount` =:amount, 
+                `description` =:description, 
+                `work_type` =:work_type, 
+                `date` =:date
+                WHERE `id` =:id';
+
+        $stmt = $connection->prepare($sql);
+        $stmt->execute(array(   'user' => 'Tena',
+                                'amount' => $data['amount'],
+                                'description' => $data['description'],
+                                'work_type' => $data['work_type'],
+                                'date' => $data['date'],
+                                'id' => $id));
+
+        // redirect to list page
+        header('Location: ' . App::config('url').'form/listIt');
+
+    }
+
 }

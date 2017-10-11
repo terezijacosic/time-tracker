@@ -5,7 +5,9 @@
 <br/>
 
 <table class="table">
-    <tr><th>No</th><th>Date</th><th>Amount</th><th>Description</th><th>Work type</th><th>Erase</th></tr>
+    <tr>
+        <th>No</th><th>Date</th><th>Amount</th><th>Description</th><th>Work type</th><th>Erase</th><th>Edit</th>
+    </tr>
     <?php
     
     $i=0;
@@ -22,10 +24,16 @@
             . '<td>' . $record['description'] . '</td>'
             . '<td>' . $record['work_type'] . '</td>'
             . '<td>
-                   <form method="post" action="http://mvc-app.loc/form/erase"  enctype="multipart/form-data">
+                    <form method="post" action="http://mvc-app.loc/form/erase"  enctype="multipart/form-data">               
                         <input type="hidden" name="erase" value="' . $record['id'] . '" >
                         <button type="submit" class="btn btn-primary">Erase record</button>
                     </form>
+               </td>'
+            . '<td>
+                    <form method="post" action="http://mvc-app.loc/form/edit"  enctype="multipart/form-data">
+                        <input type="hidden" name="edit" value="' . $record['id'] . '" >
+                        <button type="submit" class="btn btn-primary">Edit record</button>
+                     </form>
                </td>'
             . '</tr>';
             //echo "</br>";

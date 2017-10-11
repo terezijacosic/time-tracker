@@ -1,10 +1,10 @@
 <div class="page-header">
-    <h1>Write down hours you have worked</h1>
+    <h1>Edit record</h1>
 </div>
 
 <br/>
 
-<form method="post" action="<?php echo App::config('url') ?>form/submit" enctype="multipart/form-data">
+<form method="post" action="<?php echo App::config('url') ?>form/submitEdit" enctype="multipart/form-data">
 
     <div class="form-group">
         <label for="amount">Amount</label>
@@ -32,7 +32,7 @@
     </div>
 
     <br/>
-
+    <input type="hidden" value="<?php echo $id;?>" name="id">
     <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>
